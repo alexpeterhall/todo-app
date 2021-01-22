@@ -1,0 +1,30 @@
+.Item {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  width: 500px;
+  margin: 5px;
+  padding: 5px;
+  box-shadow: 2px 2px 2px 2px #ccc;
+}
+
+.Item:hover {
+  background-color: rgba(198, 228, 250, 0.45);
+  box-shadow: 2px 2px 2px 2px #ccc;
+}
+
+.Text {
+  flex: 1 0 0;
+  max-width: 400px;
+  overflow-wrap: break-word;
+  margin: 5px 0 5px 0;
+  text-align: left;
+}
+
+.Checkbox {
+  margin: 10px 10px 0 10px;
+  height: 20px;
+  width: 20px;
+}
