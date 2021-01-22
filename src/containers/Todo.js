@@ -18,7 +18,12 @@ class Todo extends Component {
         {
           id: 3,
           name:
-            'Thisisareallylongstringthatwascausingmeheadachesbutshouldalsowrapwhenitrunsoutofspace',
+            'Thisisareallylongstringthatlikestocauseheadachesandgenerallyjustruinyourhappinesswhenstylingwithcss',
+        },
+        {
+          id: 4,
+          name:
+            'This is a longer todo item that should wrap when it runs out of space. This is a longer todo item that should wrap when it runs out of space. This is a longer todo item that should wrap when it runs out of space. This is a longer todo item that should wrap when it runs out of space. This is a longer todo item that should wrap when it runs out of space. This is a longer todo item that should wrap when it runs out of space. This is a longer todo item that should wrap when it runs out of space.',
         },
       ],
       newInputItem: '',

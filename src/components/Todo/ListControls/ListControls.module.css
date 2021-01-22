@@ -1,19 +1,16 @@
 .Controls {
   display: flex;
-  flex-flow: row;
+  flex-flow: column;
   align-items: center;
-  justify-content: center;
-  text-align: center;
   font-weight: bold;
-  margin: auto;
   padding: 10px 0;
 }
 
 .Controls input {
-  font-size: 1.2em;
+  font-size: 1em;
   padding: 10px;
-  width: 450px;
-  height: 30px;
+  width: 90%;
+  height: 50px;
   border: 1px solid black;
   border-radius: 4px;
   position: relative;
@@ -23,5 +20,18 @@
 
 .Controls input:hover {
   background-color: rgba(233, 229, 229, 0.45);
-  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0);
+}
+
+@media (min-width: 500px) {
+  .Controls {
+    flex-flow: row;
+    justify-content: center;
+  }
+
+  .Controls input {
+    font-size: 1.2em;
+    width: 50%;
+    height: 30px;
+  }
 }

@@ -4,10 +4,12 @@
   flex-wrap: nowrap;
   justify-content: space-between;
   font-size: 1.2rem;
-  width: 500px;
+  width: 90%;
   margin: 5px;
   padding: 5px;
   box-shadow: 2px 2px 2px 2px #ccc;
+  background-color: rgba(247, 249, 250, 0.45);
+  border-radius: 4px;
 }
 
 .Item:hover {
@@ -17,14 +19,24 @@
 
 .Text {
   flex: 1 0 0;
-  max-width: 400px;
+  max-width: 85%;
   overflow-wrap: break-word;
   margin: 5px 0 5px 0;
   text-align: left;
 }
 
 .Checkbox {
-  margin: 10px 10px 0 10px;
+  margin: 10px 10px 0 3px;
   height: 20px;
-  width: 20px;
+  min-width: 20px;
+}
+
+@media (min-width: 500px) {
+  .Item {
+    width: 60%;
+  }
+
+  .Checkbox {
+    margin: 10px 10px 0 10px;
+  }
 }
