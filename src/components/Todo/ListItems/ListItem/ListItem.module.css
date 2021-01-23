@@ -13,8 +13,8 @@
 }
 
 .Item:hover {
-  background-color: rgba(198, 228, 250, 0.45);
-  box-shadow: 2px 2px 2px 2px #ccc;
+  background-color: rgba(225, 237, 245, 0.45);
+  box-shadow: 2px 2px 2px 2px #30475e;
 }
 
 .Text {
@@ -27,8 +27,18 @@
 
 .Checkbox {
   margin: 10px 10px 0 3px;
-  height: 20px;
-  min-width: 20px;
+  height: 25px;
+  min-width: 25px;
+}
+
+.Complete {
+  text-decoration: line-through;
+  background-color: #bbbfca;
+  opacity: 0.3;
+}
+.Complete:hover {
+  background-color: rgba(6, 6, 6, 0.45);
+  box-shadow: 2px 2px 2px 2px #30475e;
 }
 
 @media (min-width: 500px) {

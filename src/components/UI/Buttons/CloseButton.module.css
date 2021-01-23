@@ -6,12 +6,12 @@
   padding: 0 0 10px 0;
   height: 32px;
   opacity: 0.5;
-  color: rgb(198, 50, 50);
+  color: #f05454;
 }
 
 .Close:hover {
   opacity: 1;
-  color: rgb(198, 50, 50);
+  color: #f05454;
 }
 
 .Close:before {

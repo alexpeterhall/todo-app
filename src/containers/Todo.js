@@ -8,20 +8,23 @@ class Todo extends Component {
     super(props);
     this.state = {
       items: [
-        { id: 0, name: 'This is a todo item' },
-        { id: 1, name: 'This is another todo item' },
+        { id: 0, complete: false, name: 'This is a todo item' },
+        { id: 1, complete: false, name: 'This is another todo item' },
         {
           id: 2,
+          complete: false,
           name:
             'This is a longer todo item that should wrap when it runs out of space',
         },
         {
           id: 3,
+          complete: false,
           name:
             'Thisisareallylongstringthatlikestocauseheadachesandgenerallyjustruinyourhappinesswhenstylingwithcss',
         },
         {
           id: 4,
+          complete: false,
           name:
             'This is a longer todo item that should wrap when it runs out of space. This is a longer todo item that should wrap when it runs out of space. This is a longer todo item that should wrap when it runs out of space. This is a longer todo item that should wrap when it runs out of space. This is a longer todo item that should wrap when it runs out of space. This is a longer todo item that should wrap when it runs out of space. This is a longer todo item that should wrap when it runs out of space.',
         },
@@ -36,7 +39,8 @@ class Todo extends Component {
 
   addItemHandler = () => {
     const newItem = {
-      id: this.state.items.length,
+      id: Math.floor(Math.random() * 100000000),
+      complete: false,
       name: this.state.newInputItem,
     };
     const newItems = [...this.state.items, newItem];
@@ -49,6 +53,16 @@ class Todo extends Component {
     this.setState({ items: itemsCopy });
   };
 
+  toggleCompletionHandler = (id) => {
+    const itemsCopy = [...this.state.items];
+    itemsCopy.forEach((el) => {
+      if (el.id === id) {
+        el.complete = !el.complete;
+      }
+    });
+    this.setState({ items: itemsCopy });
+  };
+
   render() {
     return (
       <div className={classes.Todo}>
@@ -56,6 +70,7 @@ class Todo extends Component {
         <ListItems
           items={this.state.items}
           deleteItem={this.deleteItemHandler}
+          toggleCompletion={this.toggleCompletionHandler}
         />
         <ListControls
           inputValue={this.state.newInputItem}

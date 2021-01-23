@@ -11,6 +11,8 @@ const listItems = (props) => {
           key={item.id}
           name={item.name}
           deleteItem={() => props.deleteItem(index)}
+          toggleCompletion={() => props.toggleCompletion(item.id)}
+          complete={item.complete}
         />
       ))}
     </div>

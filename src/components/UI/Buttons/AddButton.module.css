@@ -11,7 +11,7 @@
   height: 40px;
   border: 1px solid #0c2111;
   border-radius: 4px;
-  background-color: #38f063;
+  background-color: #54e346;
   cursor: pointer;
   outline: none;
 }
@@ -33,7 +33,7 @@
   height: 40px;
   border: 1px solid #0c2111;
   border-radius: 4px;
-  background-color: rgb(198, 50, 50);
+  background-color: #f05454;
   cursor: not-allowed;
   outline: none;
   opacity: 0.3;
