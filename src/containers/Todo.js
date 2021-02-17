@@ -8,13 +8,23 @@ class Todo extends Component {
     super(props);
     this.state = {
       items: [
-        { id: 0, complete: false, name: 'This is a todo item' },
-        { id: 1, complete: false, name: 'This is another todo item' },
+        {
+          id: 0,
+          complete: false,
+          name:
+            '"Many a false step was made by standing still." - Fortune Cookie',
+        },
+        {
+          id: 1,
+          complete: false,
+          name:
+            '"Your mind will take the shape of what you frequently hold in thought." - Marcus Aurelius',
+        },
         {
           id: 2,
           complete: false,
           name:
-            'This is a longer todo item that should wrap when it runs out of space',
+            '"In the beginner\'s mind there are many possibilities; In the expert\'s, there are few." - Zen Master Shunryu Suzuki',
         },
         {
           id: 3,
@@ -26,10 +36,11 @@ class Todo extends Component {
           id: 4,
           complete: false,
           name:
-            'This is a longer todo item that should wrap when it runs out of space. This is a longer todo item that should wrap when it runs out of space. This is a longer todo item that should wrap when it runs out of space. This is a longer todo item that should wrap when it runs out of space. This is a longer todo item that should wrap when it runs out of space. This is a longer todo item that should wrap when it runs out of space. This is a longer todo item that should wrap when it runs out of space.',
+            "\"To a disciple who was forever complaining about others, the Master said, 'If it is peace you want, seek to change yourself, not other people. It is easier to protect your feet with slippers than to carpet the whole of the earth.'” - Anthony de Mello",
         },
       ],
       newInputItem: '',
+      filterActiveOnly: false,
     };
   }
 
@@ -63,6 +74,12 @@ class Todo extends Component {
     this.setState({ items: itemsCopy });
   };
 
+  toggleFilterHandler = () => {
+    this.setState((prevState) => {
+      return { filterActiveOnly: !prevState.filterActiveOnly };
+    });
+  };
+
   render() {
     return (
       <div className={classes.Todo}>
@@ -71,11 +88,13 @@ class Todo extends Component {
           items={this.state.items}
           deleteItem={this.deleteItemHandler}
           toggleCompletion={this.toggleCompletionHandler}
+          activeOnly={this.state.filterActiveOnly}
         />
         <ListControls
           inputValue={this.state.newInputItem}
           changed={this.inputChangedHandler}
           addItem={this.addItemHandler}
+          clicked={this.toggleFilterHandler}
         />
       </div>
     );

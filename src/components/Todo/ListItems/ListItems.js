@@ -2,7 +2,7 @@ import React from 'react';
 import ListItem from './ListItem/ListItem';
 import classes from './ListItems.module.css';
 
-const listItems = (props) => {
+const ListItems = (props) => {
   return (
     <div className={classes.List}>
       {props.items.map((item, index) => (
@@ -10,13 +10,14 @@ const listItems = (props) => {
           id={item.id}
           key={item.id}
           name={item.name}
+          complete={item.complete}
+          activeOnly={props.activeOnly}
           deleteItem={() => props.deleteItem(index)}
           toggleCompletion={() => props.toggleCompletion(item.id)}
-          complete={item.complete}
         />
       ))}
     </div>
   );
 };
 
-export default listItems;
+export default ListItems;

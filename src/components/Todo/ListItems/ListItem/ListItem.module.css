@@ -10,6 +10,7 @@
   box-shadow: 2px 2px 2px 2px #ccc;
   background-color: rgba(247, 249, 250, 0.45);
   border-radius: 4px;
+  transition: all .5s ease;
 }
 
 .Item:hover {
@@ -36,10 +37,16 @@
   background-color: #bbbfca;
   opacity: 0.3;
 }
+
 .Complete:hover {
   background-color: rgba(6, 6, 6, 0.45);
   box-shadow: 2px 2px 2px 2px #30475e;
 }
+
+.Hidden {
+  display: none;
+}
+
 
 @media (min-width: 500px) {
   .Item {

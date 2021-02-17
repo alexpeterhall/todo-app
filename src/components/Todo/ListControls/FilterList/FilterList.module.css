@@ -1,0 +1,19 @@
+.Filter {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.Filter p {
+  color: #222831;
+  font-size: 1.3em;
+  font-weight: bold;
+  padding: 0px 10px;
+}
+
+.Checkbox {
+  margin: 0;
+  height: 25px;
+  min-width: 25px;
+}
