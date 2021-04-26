@@ -12,7 +12,7 @@ const ListItems = (props) => {
           name={item.name}
           complete={item.complete}
           activeOnly={props.activeOnly}
-          deleteItem={() => props.deleteItem(index)}
+          deleteItem={() => props.deleteItem(item.id)}
           toggleCompletion={() => props.toggleCompletion(item.id)}
         />
       ))}

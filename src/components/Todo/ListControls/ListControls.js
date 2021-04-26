@@ -7,14 +7,10 @@ const ListControls = (props) => {
   return (
     <Fragment>
       <div className={classes.Controls}>
-        <input
-          type='text'
-          value={props.inputValue}
-          onChange={(event) => props.changed(event)}
-        />
+        <input type='text' value={props.inputValue} onChange={(event) => props.changed(event)} />
         <AddButton addItem={props.addItem} inputValue={props.inputValue} />
       </div>
-      <FilterList clicked={() => props.clicked()} />
+      <FilterList clicked={props.clicked} />
     </Fragment>
   );
 };

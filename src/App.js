@@ -1,7 +1,7 @@
-import Todo from './containers/Todo';
+import TodoHooks from './containers/TodoHooks';
 
 function App() {
-  return <Todo />;
+  return <TodoHooks />;
 }
 
 export default App;
