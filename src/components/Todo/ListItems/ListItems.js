@@ -1,23 +1,23 @@
-import React from 'react';
-import ListItem from './ListItem/ListItem';
-import classes from './ListItems.module.css';
+import React from 'react'
+import ListItem from './ListItem/ListItem'
+import classes from './ListItems.module.css'
 
-const ListItems = (props) => {
+const ListItems = ({ todoList, deleteItem, toggleComplete, showActiveOnly }) => {
   return (
     <div className={classes.List}>
-      {props.items.map((item, index) => (
+      {todoList.map((item) => (
         <ListItem
           id={item.id}
           key={item.id}
           name={item.name}
           complete={item.complete}
-          activeOnly={props.activeOnly}
-          deleteItem={() => props.deleteItem(item.id)}
-          toggleCompletion={() => props.toggleCompletion(item.id)}
+          showActiveOnly={showActiveOnly}
+          deleteItem={() => deleteItem(item.id)}
+          toggleComplete={() => toggleComplete(item.id)}
         />
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default ListItems;
+export default ListItems

@@ -47,6 +47,26 @@
   display: none;
 }
 
+.Close {
+  display: flex;
+  flex-flow: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 0 10px 0;
+  height: 32px;
+  opacity: 0.5;
+  color: #f05454;
+}
+
+.Close:hover {
+  opacity: 1;
+  color: #f05454;
+}
+
+.Close:before {
+  font-size: 2.5em;
+  content: '\00d7'; /* This will render the 'X' */
+}
 
 @media (min-width: 500px) {
   .Item {
@@ -55,5 +75,10 @@
 
   .Checkbox {
     margin: 10px 10px 0 10px;
+  }
+
+    .Close {
+    opacity: 0.3;
+    padding: 0 10px 10px 0;
   }
 }

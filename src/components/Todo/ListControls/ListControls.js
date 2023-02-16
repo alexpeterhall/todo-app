@@ -1,18 +1,45 @@
-import React, { Fragment } from 'react';
-import classes from './ListControls.module.css';
-import AddButton from '../../UI/Buttons/AddButton';
-import FilterList from './FilterList/FilterList';
+import React from 'react'
+import classes from './ListControls.module.css'
 
-const ListControls = (props) => {
+const ListControls = ({ addItem, toggleActive }) => {
+  const [inputValue, setInputValue] = React.useState('')
+
+  function handleInputValueChange(event) {
+    setInputValue(event.target.value)
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault()
+    addItem(inputValue)
+    setInputValue('')
+  }
+
   return (
-    <Fragment>
-      <div className={classes.Controls}>
-        <input type='text' value={props.inputValue} onChange={(event) => props.changed(event)} />
-        <AddButton addItem={props.addItem} inputValue={props.inputValue} />
-      </div>
-      <FilterList clicked={props.clicked} />
-    </Fragment>
-  );
-};
+    <>
+      <form name='addTodo' onSubmit={handleSubmit} className={classes.Controls}>
+        <input
+          type='text'
+          required
+          minLength='2'
+          value={inputValue}
+          onChange={handleInputValueChange}
+          className={classes.InputBox}
+        />
+        <button
+          type='submit'
+          name='Add'
+          disabled={inputValue.length < 2 ? true : false}
+          className={inputValue.length < 2 ? classes.Disabled : classes.Add}>
+          Add
+        </button>
+      </form>
 
-export default ListControls;
+      <div className={classes.Filter}>
+        <p>Display Only Active Items:</p>
+        <input className={classes.Checkbox} type='checkbox' onClick={toggleActive} />
+      </div>
+    </>
+  )
+}
+
+export default ListControls
