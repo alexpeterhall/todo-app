@@ -3,7 +3,7 @@ import ListItems from './ListItems/ListItems'
 import ListControls from './ListControls/ListControls'
 import classes from './Todo.module.css'
 
-const defaultItems = [
+const defaultItems: TodoItem[] = [
   {
     id: 0,
     complete: false,
@@ -35,7 +35,7 @@ const Todo = () => {
   const [todoList, setTodoList] = React.useState(defaultItems)
   const [showActiveOnly, setShowActiveOnly] = React.useState(false)
 
-  function handleAddItem(name) {
+  function handleAddItem(name: string) {
     setTodoList([
       ...todoList,
       {
@@ -46,11 +46,11 @@ const Todo = () => {
     ])
   }
 
-  function handleDeleteItem(id) {
+  function handleDeleteItem(id: number) {
     setTodoList(todoList.filter((item) => item.id !== id))
   }
 
-  function handleToggleComplete(id) {
+  function handleToggleComplete(id: number) {
     setTodoList(
       todoList.map((item) => {
         if (item.id === id) {
@@ -75,7 +75,7 @@ const Todo = () => {
         toggleComplete={(id) => handleToggleComplete(id)}
         showActiveOnly={showActiveOnly}
       />
-      <ListControls addItem={(name) => handleAddItem(name)} toggleActive={handleToggleActive} />
+      <ListControls addItem={(name: string) => handleAddItem(name)} toggleActive={handleToggleActive} />
     </div>
   )
 }

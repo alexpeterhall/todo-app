@@ -1,14 +1,14 @@
 import React from 'react'
 import classes from './ListControls.module.css'
 
-const ListControls = ({ addItem, toggleActive }) => {
+const ListControls = ({ addItem, toggleActive }: ListControlsProps) => {
   const [inputValue, setInputValue] = React.useState('')
 
-  function handleInputValueChange(event) {
+  function handleInputValueChange(event: React.ChangeEvent<HTMLInputElement>) {
     setInputValue(event.target.value)
   }
 
-  function handleSubmit(event) {
+  function handleSubmit(event: React.ChangeEvent<HTMLFormElement>) {
     event.preventDefault()
     addItem(inputValue)
     setInputValue('')
@@ -20,7 +20,7 @@ const ListControls = ({ addItem, toggleActive }) => {
         <input
           type='text'
           required
-          minLength='2'
+          minLength={2}
           value={inputValue}
           onChange={handleInputValueChange}
           className={classes.InputBox}

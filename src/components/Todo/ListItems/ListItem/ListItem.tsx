@@ -1,7 +1,7 @@
 import React from 'react'
 import classes from './ListItem.module.css'
 
-const ListItem = ({ id, name, complete, showActiveOnly, toggleComplete, deleteItem }) => {
+const ListItem = ({ id, name, complete, showActiveOnly, toggleComplete, deleteItem }: ListItemProps) => {
   let itemStyle = null
   if (complete && showActiveOnly) {
     itemStyle = [classes.Hidden, classes.Item].join(' ')
@@ -13,9 +13,10 @@ const ListItem = ({ id, name, complete, showActiveOnly, toggleComplete, deleteIt
 
   return (
     <div key={id} className={itemStyle}>
-      <input className={classes.Checkbox} type='checkbox' id={id} onClick={toggleComplete} />
+      <input className={classes.Checkbox} type='checkbox' id={`{$id}`} onClick={() => toggleComplete(id)} />
       <p className={classes.Text}>{name}</p>
-      <div className={classes.Close} onClick={deleteItem} />
+
+      <div className={classes.Close} onClick={() => deleteItem(id)} />
     </div>
   )
 }
