@@ -36,7 +36,7 @@ const ListControls = ({ addItem, toggleActive }: ListControlsProps) => {
 
       <div className={classes.Filter}>
         <p>Display Only Active Items:</p>
-        <input className={classes.Checkbox} type='checkbox' onClick={toggleActive} />
+        <input className={classes.Checkbox} type='checkbox' defaultChecked={true} onClick={toggleActive} />
       </div>
     </>
   )

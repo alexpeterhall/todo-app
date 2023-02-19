@@ -1,20 +1,25 @@
 declare module "*.module.css";
 
+interface TodoItemFromDB {
+  [key: string]: string
+}
+
 interface TodoItem {
-  id: number
+  id: string
   complete: boolean
   name: string
 }
 
+
 interface BaseListItemProps {
   showActiveOnly: boolean
-  toggleComplete: (id: number) => void
-  deleteItem: (id: number) => void
+  toggleComplete: (id: string) => void
+  deleteItem: (id: string) => void
 }
 
 interface ListItemProps extends BaseListItemProps, TodoItem { }
 
-interface ListItemsProps extends BaseListItemProps {
+interface ListItemsProps extends BaseListItemProps{
   todoList: TodoItem[]
 }
 

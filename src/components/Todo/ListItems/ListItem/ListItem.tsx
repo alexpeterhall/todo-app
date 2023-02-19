@@ -12,8 +12,15 @@ const ListItem = ({ id, name, complete, showActiveOnly, toggleComplete, deleteIt
   }
 
   return (
-    <div key={id} className={itemStyle}>
-      <input className={classes.Checkbox} type='checkbox' id={`{$id}`} onClick={() => toggleComplete(id)} />
+    <div key={id} id={id} className={itemStyle}>
+      <input
+        className={classes.Checkbox}
+        type='checkbox'
+        id={`{$id}`}
+        checked={complete ? true : false}
+        readOnly={true}
+        onClick={() => toggleComplete(id)}
+      />
       <p className={classes.Text}>{name}</p>
 
       <div className={classes.Close} onClick={() => deleteItem(id)} />
