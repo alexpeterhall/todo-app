@@ -1,7 +1,7 @@
 import React from 'react'
-import classes from './ListControls.module.css'
+import classes from './Controls.module.css'
 
-const ListControls = ({ addItem, toggleActive }: ListControlsProps) => {
+const Controls = ({ addItem, toggleActive }: ControlsProps) => {
   const [inputValue, setInputValue] = React.useState('')
 
   function handleInputValueChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -36,10 +36,10 @@ const ListControls = ({ addItem, toggleActive }: ListControlsProps) => {
 
       <div className={classes.Filter}>
         <p>Display Only Active Items:</p>
-        <input className={classes.Checkbox} type='checkbox' defaultChecked={true} onClick={toggleActive} />
+        <input className={classes.Checkbox} type='checkbox' defaultChecked={false} onClick={toggleActive} />
       </div>
     </>
   )
 }
 
-export default ListControls
+export default Controls

@@ -9,6 +9,8 @@ This is built with React and bootstrapped with [Create React App](https://github
 - [x] Mobile first layout
 - [x] Implement checkbox to complete items
 - [x] Filter for active/completed items
-- [ ] Open items in a modal overlay to further edit
-- [ ] Keep track of deleted items
+- [x] Keep track of deleted items
 - [ ] Hook it up to Firebase
+  - [x] Read default items from Firebase
+  - [ ] Save/Write changes to Firebase
+- [ ] Open items in a modal overlay to further edit
