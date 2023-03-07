@@ -1,20 +1,23 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import ActiveItems from './Items/ActiveItems/ActiveItems'
 import DeletedItems from './Items/DeletedItems/DeletedItems'
 import ListControls from './Controls/Controls'
 import classes from './Todo.module.css'
 import { swapItems } from '../../utilities/swapItems'
-import { child, get } from 'firebase/database'
-import FirebaseDB from '../../services/firebase'
+import { child, get, ref } from 'firebase/database'
+import { FirebaseContext } from '../../services/firebase'
 
 const Todo = () => {
+  const FirebaseDB = useContext(FirebaseContext)
   const [activeItems, setActiveItems] = React.useState({} as TodoItem)
   const [completedItems, setCompletedItems] = React.useState({} as TodoItem)
   const [deletedItems, setDeletedItems] = React.useState({} as TodoItem)
   const [showActiveOnly, setShowActiveOnly] = React.useState(false)
 
   React.useEffect(() => {
-    get(child(FirebaseDB, `/users/alex/todos/`))
+    if (FirebaseDB == null) throw new Error('No dbRef context found')
+    const dbRef = ref(FirebaseDB)
+    get(child(dbRef, `/users/alex/todos/`))
       .then((snapshot) => {
         if (snapshot.exists()) {
           const data = snapshot.val()
@@ -29,7 +32,7 @@ const Todo = () => {
         console.error(error)
         throw new Error('Error getting data from Firebase')
       })
-  }, [])
+  }, [FirebaseDB])
 
   function handleAddItem(name: string) {
     const newActiveItems = { ...activeItems }
