@@ -3,39 +3,9 @@ import ActiveItems from './Items/ActiveItems/ActiveItems'
 import DeletedItems from './Items/DeletedItems/DeletedItems'
 import ListControls from './Controls/Controls'
 import classes from './Todo.module.css'
-import myFirebaseURL from '../../myFirebase'
-import { getDatabase, ref, child, get } from 'firebase/database'
-import { initializeApp } from '@firebase/app'
-// import { getAnalytics } from 'firebase/analytics'
-
-const firebaseConfig = { databaseURL: myFirebaseURL }
-const app = initializeApp(firebaseConfig)
-// const analytics = getAnalytics(app)
-const database = getDatabase(app)
-const dbRef = ref(database)
-
-function swapItems(
-  id: string,
-  stateA: TodoItem,
-  stateASetter: React.Dispatch<React.SetStateAction<TodoItem>>,
-  stateB: TodoItem,
-  stateBSetter: React.Dispatch<React.SetStateAction<TodoItem>>
-): void {
-  const newStateA = { ...stateA }
-  const newStateB = { ...stateB }
-
-  if (Object.hasOwn(newStateA, id)) {
-    const itemToSwap = newStateA[id]
-    delete newStateA[id]
-    newStateB[id] = itemToSwap
-  } else {
-    const itemToSwap = newStateB[id]
-    delete newStateB[id]
-    newStateA[id] = itemToSwap
-  }
-  stateASetter(newStateA)
-  stateBSetter(newStateB)
-}
+import { swapItems } from '../../utilities/swapItems'
+import { child, get } from 'firebase/database'
+import FirebaseDB from '../../services/firebase'
 
 const Todo = () => {
   const [activeItems, setActiveItems] = React.useState({} as TodoItem)
@@ -44,7 +14,7 @@ const Todo = () => {
   const [showActiveOnly, setShowActiveOnly] = React.useState(false)
 
   React.useEffect(() => {
-    get(child(dbRef, `/users/alex/todos/`))
+    get(child(FirebaseDB, `/users/alex/todos/`))
       .then((snapshot) => {
         if (snapshot.exists()) {
           const data = snapshot.val()
