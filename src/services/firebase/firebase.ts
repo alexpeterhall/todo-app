@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app'
-import { getDatabase } from 'firebase/database'
+import { get, getDatabase, ref } from 'firebase/database'
+import { MyFirebase } from './types'
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -12,9 +13,28 @@ const config = {
   measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 }
 
-class Firebase {
-  app = initializeApp(config)
-  database = getDatabase(this.app)
+class Firebase implements MyFirebase {
+  private app
+  private database
+  constructor() {
+    this.app = initializeApp(config)
+    this.database = getDatabase(this.app)
+  }
+  
+  getUserReference = (user: string) => ref(this.database, `users/${user}`)
+
+  getUserTodoList = async (user: string): Promise<TodoList> => {
+    const todoList = await get(ref(this.database, `users/${user}/todos/`))
+      .then((snapshot) => {
+        if (snapshot.exists()) return snapshot.val()
+        console.log('No data available')
+      })
+      .catch((error) => {
+        console.error(error)
+        throw new Error('Error getting data from Firebase')
+      })
+    return todoList
+  }
 }
 
 export default Firebase

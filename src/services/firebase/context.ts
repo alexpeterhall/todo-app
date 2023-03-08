@@ -1,6 +1,6 @@
 import { createContext } from 'react'
-import { Database } from 'firebase/database'
+import { MyFirebase } from './types'
 
-const FirebaseContext = createContext<Database | null>(null)
+const FirebaseContext = createContext<MyFirebase | null>(null)
 
 export default FirebaseContext

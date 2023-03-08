@@ -1,9 +1,9 @@
 export function swapItems(
   id: string,
-  stateA: TodoItem,
-  stateASetter: React.Dispatch<React.SetStateAction<TodoItem>>,
-  stateB: TodoItem,
-  stateBSetter: React.Dispatch<React.SetStateAction<TodoItem>>
+  stateA: TodoItems,
+  stateASetter: React.Dispatch<React.SetStateAction<TodoItems>>,
+  stateB: TodoItems,
+  stateBSetter: React.Dispatch<React.SetStateAction<TodoItems>>
 ): void {
   const newStateA = { ...stateA }
   const newStateB = { ...stateB }

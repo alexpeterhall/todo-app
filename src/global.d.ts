@@ -1,11 +1,17 @@
 declare module "*.module.css";
 
-interface TodoItem {
+interface TodoList {
+  active: TodoItems
+  completed: TodoItems
+  deleted: TodoItems
+}
+
+interface TodoItems {
   [key: string]: string
 }
 
 interface ActiveItemsProps {
-  items: TodoItem
+  items: TodoItems
   complete: boolean
   showActiveOnly: boolean
   toggleComplete: (id: string) => void
@@ -13,7 +19,7 @@ interface ActiveItemsProps {
 }
 
 interface DeletedItemsProps {
-  items: TodoItem
+  items: TodoItems
 }
 
 interface ControlsProps {

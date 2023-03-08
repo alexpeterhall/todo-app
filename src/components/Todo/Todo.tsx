@@ -1,38 +1,32 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import ActiveItems from './Items/ActiveItems/ActiveItems'
 import DeletedItems from './Items/DeletedItems/DeletedItems'
 import ListControls from './Controls/Controls'
 import classes from './Todo.module.css'
 import { swapItems } from '../../utilities/swapItems'
-import { child, get, ref } from 'firebase/database'
 import { FirebaseContext } from '../../services/firebase'
 
+const user = 'test'
+
 const Todo = () => {
-  const FirebaseDB = useContext(FirebaseContext)
-  const [activeItems, setActiveItems] = React.useState({} as TodoItem)
-  const [completedItems, setCompletedItems] = React.useState({} as TodoItem)
-  const [deletedItems, setDeletedItems] = React.useState({} as TodoItem)
+  const Firebase = React.useContext(FirebaseContext)
+  const [activeItems, setActiveItems] = React.useState({} as TodoItems)
+  const [completedItems, setCompletedItems] = React.useState({} as TodoItems)
+  const [deletedItems, setDeletedItems] = React.useState({} as TodoItems)
   const [showActiveOnly, setShowActiveOnly] = React.useState(false)
 
   React.useEffect(() => {
-    if (FirebaseDB == null) throw new Error('No dbRef context found')
-    const dbRef = ref(FirebaseDB)
-    get(child(dbRef, `/users/alex/todos/`))
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          const data = snapshot.val()
-          setActiveItems({ ...data.active })
-          setCompletedItems({ ...data.completed })
-          setDeletedItems({ ...data.deleted })
-        } else {
-          console.log('No data available')
-        }
-      })
-      .catch((error) => {
-        console.error(error)
-        throw new Error('Error getting data from Firebase')
-      })
-  }, [FirebaseDB])
+    let effectStale = false
+    ;(async () => {
+      if (Firebase == null) throw new Error('Firebase Database context not found')
+      const data = await Firebase.getUserTodoList(user)
+      if (effectStale) return
+      setActiveItems({ ...data.active })
+      setCompletedItems({ ...data.completed })
+      setDeletedItems({ ...data.deleted })
+      return () => (effectStale = true)
+    })()
+  }, [Firebase])
 
   function handleAddItem(name: string) {
     const newActiveItems = { ...activeItems }
