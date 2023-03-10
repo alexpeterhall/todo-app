@@ -10,7 +10,11 @@ This is built with React and bootstrapped with [Create React App](https://github
 - [x] Implement checkbox to complete items
 - [x] Filter for active/completed items
 - [x] Keep track of deleted items
-- [ ] Hook it up to Firebase
+- [x] Hook it up to Firebase - March 2023
   - [x] Read default items from Firebase
-  - [ ] Save/Write changes to Firebase
+  - [x] Save/Write changes to Firebase
 - [ ] Open items in a modal overlay to further edit
+- [ ] Drag and drop re-ordering of items
+- [ ] Color code prioritizing
+- [ ] Toggle display date on items
+- [ ] Backend job that moves completed items to an archive every so often
