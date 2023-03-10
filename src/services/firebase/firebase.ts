@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app'
-import { get, getDatabase, ref } from 'firebase/database'
+import { get, getDatabase, push, ref, set, update } from 'firebase/database'
 import { MyFirebase } from './types'
 
 const config = {
@@ -34,6 +34,10 @@ class Firebase implements MyFirebase {
         throw new Error('Error getting data from Firebase')
       })
     return todoList
+  }
+
+  updateTodoList = (list: string, items: TodoItems) => {
+    update(ref(this.database, `users/test/todos/${list}`), items)
   }
 }
 

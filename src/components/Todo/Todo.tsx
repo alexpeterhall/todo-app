@@ -14,19 +14,31 @@ const Todo = () => {
   const [completedItems, setCompletedItems] = React.useState({} as TodoItems)
   const [deletedItems, setDeletedItems] = React.useState({} as TodoItems)
   const [showActiveOnly, setShowActiveOnly] = React.useState(false)
+  const dataLoadComplete = React.useRef(false)
+  const firstRender = React.useRef(true)
 
   React.useEffect(() => {
-    let effectStale = false
+    if (Firebase == null) throw new Error('Firebase Database context not found')
     ;(async () => {
-      if (Firebase == null) throw new Error('Firebase Database context not found')
       const data = await Firebase.getUserTodoList(user)
-      if (effectStale) return
-      setActiveItems({ ...data.active })
-      setCompletedItems({ ...data.completed })
-      setDeletedItems({ ...data.deleted })
-      return () => (effectStale = true)
+      setActiveItems({ ...data?.active })
+      setCompletedItems({ ...data?.completed })
+      setDeletedItems({ ...data?.deleted })
+      dataLoadComplete.current = true
     })()
   }, [Firebase])
+
+  React.useEffect(() => {
+    if (Firebase == null) throw new Error('Firebase Database context not found')
+    if (!dataLoadComplete.current) return
+    if (firstRender.current) {
+      firstRender.current = false
+      return
+    }
+    Firebase.updateTodoList('active', activeItems)
+    Firebase.updateTodoList('completed', completedItems)
+    Firebase.updateTodoList('deleted', deletedItems)
+  }, [Firebase, activeItems, completedItems, deletedItems])
 
   function handleAddItem(name: string) {
     const newActiveItems = { ...activeItems }
