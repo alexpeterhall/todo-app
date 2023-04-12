@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app'
-import { get, getDatabase, push, ref, set, update } from 'firebase/database'
+import { get, getDatabase, ref, set } from 'firebase/database'
 import { MyFirebase } from './types'
 
 const config = {
@@ -31,13 +31,19 @@ class Firebase implements MyFirebase {
       })
       .catch((error) => {
         console.error(error)
-        throw new Error('Error getting data from Firebase')
+        throw new Error('Error GETTING from Firebase ' + error)
       })
     return todoList
   }
 
-  updateTodoList = (list: string, items: TodoItems) => {
-    update(ref(this.database, `users/test/todos/${list}`), items)
+  updateTodoList = (user: string, list: string, items: TodoItems): void => {
+    try {
+      set(ref(this.database, `users/${user}/todos/${list}`), items)
+    }
+    catch (error) {
+      console.error(error)
+      throw new Error('Error WRITING to Firebase ' + error)
+    }
   }
 }
 

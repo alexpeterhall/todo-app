@@ -6,7 +6,8 @@ import classes from './Todo.module.css'
 import { swapItems } from '../../utilities/swapItems'
 import { FirebaseContext } from '../../services/firebase'
 
-const user = 'test'
+// Hardcoded test user for development/demo purposes.
+const user = 'demo'
 
 const Todo = () => {
   const Firebase = React.useContext(FirebaseContext)
@@ -35,9 +36,9 @@ const Todo = () => {
       firstRender.current = false
       return
     }
-    Firebase.updateTodoList('active', activeItems)
-    Firebase.updateTodoList('completed', completedItems)
-    Firebase.updateTodoList('deleted', deletedItems)
+    Firebase.updateTodoList(user, 'active', activeItems)
+    Firebase.updateTodoList(user, 'completed', completedItems)
+    Firebase.updateTodoList(user, 'deleted', deletedItems)
   }, [Firebase, activeItems, completedItems, deletedItems])
 
   function handleAddItem(name: string) {
