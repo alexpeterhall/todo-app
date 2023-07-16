@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app'
 import { get, getDatabase, ref, set } from 'firebase/database'
-import { MyFirebase } from './types'
+import { FirebaseInstance } from './types'
 
 let config: {}
 
@@ -19,7 +19,7 @@ if (window.location.hostname === 'localhost') {
   }
 }
 
-class Firebase implements MyFirebase {
+class Firebase implements FirebaseInstance {
   private app
   private database
   constructor() {

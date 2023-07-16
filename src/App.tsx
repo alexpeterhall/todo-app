@@ -1,14 +1,12 @@
 import React from 'react'
 import Todo from './components/Todo/Todo'
-import Firebase, { FirebaseContext } from './services/firebase'
-
-const MyFirebase = new Firebase()
+import FirebaseProvider from './services/firebase/FirebaseProvider'
 
 function App() {
   return (
-    <FirebaseContext.Provider value={MyFirebase}>
+    <FirebaseProvider>
       <Todo />
-    </FirebaseContext.Provider>
+    </FirebaseProvider>
   )
 }
 

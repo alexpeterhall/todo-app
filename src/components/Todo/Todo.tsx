@@ -4,7 +4,7 @@ import DeletedItems from './Items/DeletedItems/DeletedItems'
 import ListControls from './Controls/Controls'
 import classes from './Todo.module.css'
 import { swapItems } from '../../utilities/swapItems'
-import { FirebaseContext } from '../../services/firebase'
+import { FirebaseContext } from '../../services/firebase/FirebaseProvider'
 
 // Hardcoded test user for development/demo purposes.
 const user = 'demo'
