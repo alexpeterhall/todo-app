@@ -30,8 +30,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "firebase": "firebase emulators:start --import=./test_data --export-on-exit",
     "eject": "react-scripts eject",
-    "start-fb": "firebase emulators:start --import seed",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
