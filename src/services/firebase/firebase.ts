@@ -5,7 +5,7 @@ import { FirebaseInstance } from './types'
 let config: {}
 
 if (window.location.hostname === 'localhost') {
-  config = { databaseURL: 'http://127.0.0.1:9000/?ns=todo-app-f39ab-default-rtdb' }
+  config = { databaseURL: process.env.REACT_APP_DATABASE_URL}
 } else {
   config = {
     apiKey: process.env.REACT_APP_API_KEY,
