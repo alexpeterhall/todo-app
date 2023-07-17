@@ -1,6 +1,11 @@
 import React from 'react'
 import classes from './Controls.module.css'
 
+interface ControlsProps {
+  addItem: (inputValue: string) => void
+  toggleActive: () => void
+}
+
 const Controls = ({ addItem, toggleActive }: ControlsProps) => {
   const [inputValue, setInputValue] = React.useState('')
 

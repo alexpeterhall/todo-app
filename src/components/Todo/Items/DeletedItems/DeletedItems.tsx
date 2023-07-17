@@ -1,6 +1,10 @@
 import React from 'react'
 import classes from '../Items.module.css'
 
+interface DeletedItemsProps {
+  items: TodoItems
+}
+
 const DeletedItems = ({ items }: DeletedItemsProps) => {
   return (
     <div className={classes.List}>

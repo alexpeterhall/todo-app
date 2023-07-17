@@ -1,6 +1,14 @@
 import React from 'react'
 import classes from '../Items.module.css'
 
+interface ActiveItemsProps {
+  items: TodoItems
+  complete: boolean
+  showActiveOnly: boolean
+  toggleComplete: (id: string) => void
+  deleteItem: (id: string) => void
+}
+
 const ActiveItems = ({ items, complete, showActiveOnly, toggleComplete, deleteItem }: ActiveItemsProps) => {
   let itemStyle: string = ''
   if (complete && showActiveOnly) {
