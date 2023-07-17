@@ -59,7 +59,9 @@
   flex-flow: row;
   justify-content: flex-end;
   align-items: center;
-  padding: 0 0 10px 0;
+  border: none;
+  background: transparent;
+  padding: 10px 5px 0 0;
   height: 32px;
   opacity: 0.5;
   color: #f05454;
@@ -71,7 +73,7 @@
 }
 
 .Close:before {
-  font-size: 2.5em;
+  font-size: 4em;
   content: '\00d7'; /* This will render the 'X' */
 }
 
@@ -86,6 +88,6 @@
 
     .Close {
     opacity: 0.3;
-    padding: 0 10px 10px 0;
+    padding: 10px 5px 0 0;
   }
 }

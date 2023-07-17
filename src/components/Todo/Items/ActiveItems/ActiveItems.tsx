@@ -31,7 +31,7 @@ const ActiveItems = ({ items, complete, showActiveOnly, toggleComplete, deleteIt
             onClick={() => toggleComplete(key)}
           />
           <p className={classes.Text}>{value}</p>
-          <div className={classes.Close} onClick={() => deleteItem(key)} />
+          <button className={classes.Close} onClick={() => deleteItem(key)} />
         </div>
       ))}
     </div>
