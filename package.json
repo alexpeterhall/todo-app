@@ -4,7 +4,6 @@
   "private": true,
   "homepage": "http://alexpeterhall.github.io/todo-app",
   "dependencies": {
-    "@types/firebase": "^3.2.1",
     "firebase": "^9.17.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -22,6 +21,7 @@
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.52.0",
     "@typescript-eslint/parser": "^5.52.0",
+    "cypress": "^12.17.1",
     "eslint": "^8.34.0",
     "gh-pages": "^5.0.0",
     "typescript": "^4.9.5"
@@ -30,6 +30,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "cy": "cypress open",
     "firebase": "firebase emulators:start --import=./test_data --export-on-exit",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",

@@ -29,19 +29,27 @@ const Controls = ({ addItem, toggleActive }: ControlsProps) => {
           value={inputValue}
           onChange={handleInputValueChange}
           className={classes.InputBox}
+          data-qa='todoInput'
         />
         <button
           type='submit'
           name='Add'
           disabled={inputValue.length < 2 ? true : false}
-          className={inputValue.length < 2 ? classes.Disabled : classes.Add}>
+          className={inputValue.length < 2 ? classes.Disabled : classes.Add}
+          data-qa='addTodoButton'>
           Add
         </button>
       </form>
 
-      <div className={classes.Filter}>
+      <div className={classes.Filter} data-qa='toggleActiveOnly'>
         <p>Display Only Active Items:</p>
-        <input className={classes.Checkbox} type='checkbox' defaultChecked={false} onClick={toggleActive} />
+        <input
+          className={classes.Checkbox}
+          type='checkbox'
+          defaultChecked={false}
+          onClick={toggleActive}
+          data-qa='toggleActiveOnlyCheckbox'
+        />
       </div>
     </>
   )

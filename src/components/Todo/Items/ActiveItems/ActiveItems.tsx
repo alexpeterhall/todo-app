@@ -19,9 +19,9 @@ const ActiveItems = ({ items, complete, showActiveOnly, toggleComplete, deleteIt
     itemStyle = classes.Item
   }
   return (
-    <div className={classes.List}>
+    <div className={classes.List} data-qa='activeItemsList'>
       {Object.entries(items).map(([key, value]) => (
-        <div key={key} id={key} className={itemStyle}>
+        <div key={key} id={key} className={itemStyle} data-qa='activeItem'>
           <input
             className={classes.Checkbox}
             type='checkbox'
@@ -29,9 +29,10 @@ const ActiveItems = ({ items, complete, showActiveOnly, toggleComplete, deleteIt
             checked={complete ? true : false}
             readOnly={true}
             onClick={() => toggleComplete(key)}
+            data-qa='toggleItemComplete'
           />
           <p className={classes.Text}>{value}</p>
-          <button className={classes.Close} onClick={() => deleteItem(key)} />
+          <button className={classes.Close} onClick={() => deleteItem(key)} data-qa='deleteActiveItem' />
         </div>
       ))}
     </div>
