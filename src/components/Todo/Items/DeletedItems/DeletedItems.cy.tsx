@@ -1,10 +1,10 @@
 import React from 'react'
 import DeletedItems from './DeletedItems'
 
-const deletedItems = {
-  '1': '"This is a deleted item"',
-  '2': '"This is also a deleted item"',
-}
+const deletedItems: TodoList = [
+  { id: '1678380134980', status: 'deleted', item: 'This is a deleted item.' },
+  { id: '1678380134981', status: 'deleted', item: 'This is also a deleted item.' },
+]
 
 describe('The Active Items Component', () => {
   beforeEach(() => {
@@ -19,9 +19,9 @@ describe('The Active Items Component', () => {
     cy.get('div[data-qa="deletedItem"]').should('have.length', 2)
   })
 
-  Object.entries(deletedItems).forEach(([key, value]) => {
-    it(`should render the text for item ${key}`, () => {
-      cy.get(`[id="${key}"]`).should('have.text', `${value}`).and('be.visible')
+  deletedItems.forEach(({ id, item }) => {
+    it(`should render the text for item ${id}`, () => {
+      cy.get(`[id="${id}"]`).should('have.text', `${item}`).and('be.visible')
     })
   })
 })

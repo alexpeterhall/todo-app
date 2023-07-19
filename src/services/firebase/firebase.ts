@@ -42,9 +42,9 @@ class Firebase implements FirebaseInstance {
     return todoList
   }
 
-  updateTodoList = (user: string, list: string, items: TodoItems): void => {
+  updateTodoList = (user: string, items: TodoList): void => {
     try {
-      set(ref(this.database, `users/${user}/todos/${list}`), items)
+      set(ref(this.database, `users/${user}/todos/`), items)
     }
     catch (error) {
       console.error(error)

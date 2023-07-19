@@ -1,11 +1,9 @@
 declare module "*.module.css";
 
-interface TodoList {
-  active: TodoItems
-  completed: TodoItems
-  deleted: TodoItems
+interface TodoItem {
+  id: string
+  status: "active" | "complete" | "deleted"
+  item: string
 }
 
-interface TodoItems {
-  [key: string]: string
-}
+type TodoList = TodoItem[]

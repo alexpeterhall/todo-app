@@ -5,7 +5,7 @@ describe('The Controls component', () => {
   beforeEach(() => {
     const addItemSpy = cy.spy().as('addItemSpy')
     const toggleActiveSpy = cy.spy().as('toggleActiveSpy')
-    cy.mount(<Controls addItem={addItemSpy} toggleActive={toggleActiveSpy} />)
+    cy.mount(<Controls addItem={addItemSpy} toggleShowActiveOnly={toggleActiveSpy} />)
   })
 
   it('renders the controls form', () => {

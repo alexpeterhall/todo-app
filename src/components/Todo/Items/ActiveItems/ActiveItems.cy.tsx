@@ -1,12 +1,28 @@
 import React from 'react'
 import ActiveItems from './ActiveItems'
 
-const activeItems = {
-  '1': '"In the beginner\'s mind there are many possibilities; In the expert\'s, there are few." - Zen Master Shunryu Suzuki',
-  '2': '"There are only two kinds of programming languages: the ones people complain about and the ones nobody uses." - Bjarne Stroustrup',
-  '3': 'Thisisareallylongstringthatlikestocauseheadachesandgenerallyjustruinyourhappinesswhenstylingwithcss',
-  '4': '"Your mind will take the shape of what you frequently hold in thought." - Marcus Aurelius',
-}
+const activeItems: TodoList = [
+  {
+    id: '1678380114788',
+    status: 'active',
+    item: '"In the beginner\'s mind there are many possibilities; In the expert\'s, there are few." - Zen Master Shunryu Suzuki',
+  },
+  {
+    id: '1678380118180',
+    status: 'active',
+    item: '"There are only two kinds of programming languages: the ones people complain about and the ones nobody uses." - Bjarne Stroustrup',
+  },
+  {
+    id: '1678380125084',
+    status: 'active',
+    item: '"Your mind will take the shape of what you frequently hold in thought." - Marcus Aurelius',
+  },
+  {
+    id: '1678380131388',
+    status: 'active',
+    item: '"Many a false step was made by standing still." - Fortune Cookie',
+  },
+]
 
 describe('The Active Items Component', () => {
   beforeEach(() => {
@@ -27,9 +43,9 @@ describe('The Active Items Component', () => {
     cy.get('div[data-qa="activeItem"]').should('have.length', 4)
   })
 
-  Object.entries(activeItems).forEach(([key, value]) => {
-    it(`should render the text for item ${key}`, () => {
-      cy.get(`[id="${key}"]`).should('have.text', `${value}`).and('be.visible')
+  activeItems.forEach(({ id, item }) => {
+    it(`should render the text for item ${id}`, () => {
+      cy.get(`[id="${id}"]`).should('have.text', `${item}`).and('be.visible')
     })
   })
 

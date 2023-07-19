@@ -2,7 +2,7 @@ import React from 'react'
 import classes from '../Items.module.css'
 
 interface ActiveItemsProps {
-  items: TodoItems
+  items: TodoList
   complete: boolean
   showActiveOnly: boolean
   toggleComplete: (id: string) => void
@@ -20,19 +20,19 @@ const ActiveItems = ({ items, complete, showActiveOnly, toggleComplete, deleteIt
   }
   return (
     <div className={classes.List} data-qa='activeItemsList'>
-      {Object.entries(items).map(([key, value]) => (
-        <div key={key} id={key} className={itemStyle} data-qa='activeItem'>
+      {items.map(({ id, item }) => (
+        <div key={id} id={id} className={itemStyle} data-qa='activeItem'>
           <input
             className={classes.Checkbox}
             type='checkbox'
-            id={key}
+            id={id}
             checked={complete ? true : false}
             readOnly={true}
-            onClick={() => toggleComplete(key)}
+            onClick={() => toggleComplete(id)}
             data-qa='toggleItemComplete'
           />
-          <p className={classes.Text}>{value}</p>
-          <button className={classes.Close} onClick={() => deleteItem(key)} data-qa='deleteActiveItem' />
+          <p className={classes.Text}>{item}</p>
+          <button className={classes.Close} onClick={() => deleteItem(id)} data-qa='deleteActiveItem' />
         </div>
       ))}
     </div>

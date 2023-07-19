@@ -58,11 +58,7 @@
           "status": "active",
           "item": "Thisisareallylongstringthatlikestocauseheadachesandgenerallyjustruinyourhappinesswhenstylingwithcss"
         },
-        {
-          "id": "1678380128428",
-          "status": "complete",
-          "item": "This is a completed item."
-        },
+        { "id": "1678380128428", "status": "complete", "item": "This is a completed item." },
         { "id": "1678380134980", "status": "deleted", "item": "This is a deleted item." }
       ]
     }

@@ -3,17 +3,14 @@ import ActiveItems from './Items/ActiveItems/ActiveItems'
 import DeletedItems from './Items/DeletedItems/DeletedItems'
 import ListControls from './Controls/Controls'
 import classes from './Todo.module.css'
-import { swapItems } from '../../utilities/swapItems'
 import { FirebaseContext } from '../../services/firebase/FirebaseProvider'
 
 // Hardcoded test user for development/demo purposes.
-const user = 'demo'
+const user = 'test'
 
 const Todo = () => {
   const Firebase = React.useContext(FirebaseContext)
-  const [activeItems, setActiveItems] = React.useState({} as TodoItems)
-  const [completedItems, setCompletedItems] = React.useState({} as TodoItems)
-  const [deletedItems, setDeletedItems] = React.useState({} as TodoItems)
+  const [todoList, setTodoList] = React.useState([] as TodoList)
   const [showActiveOnly, setShowActiveOnly] = React.useState(false)
   const dataLoadComplete = React.useRef(false)
   const firstRender = React.useRef(true)
@@ -22,9 +19,7 @@ const Todo = () => {
     if (Firebase == null) throw new Error('Firebase Database context not found')
     ;(async () => {
       const data = await Firebase.getUserTodoList(user)
-      setActiveItems({ ...data?.active })
-      setCompletedItems({ ...data?.completed })
-      setDeletedItems({ ...data?.deleted })
+      setTodoList(data)
       dataLoadComplete.current = true
     })()
   }, [Firebase])
@@ -36,30 +31,37 @@ const Todo = () => {
       firstRender.current = false
       return
     }
-    Firebase.updateTodoList(user, 'active', activeItems)
-    Firebase.updateTodoList(user, 'completed', completedItems)
-    Firebase.updateTodoList(user, 'deleted', deletedItems)
-  }, [Firebase, activeItems, completedItems, deletedItems])
+    Firebase.updateTodoList(user, todoList)
+  }, [Firebase, todoList])
 
-  function handleAddItem(name: string) {
-    const newActiveItems = { ...activeItems }
-    newActiveItems[Date.now().toString()] = name
-    setActiveItems(newActiveItems)
+  function getItemsByStatus(status: string): TodoList {
+    return todoList.filter((item) => item?.status === status)
   }
 
-  function handleDeleteItem(id: string) {
-    if (Object.hasOwn(activeItems, id)) {
-      swapItems(id, activeItems, setActiveItems, deletedItems, setDeletedItems)
-    } else {
-      swapItems(id, completedItems, setCompletedItems, deletedItems, setDeletedItems)
-    }
+  function handleAddItem(todo: string) {
+    const newTodoList: TodoList = [...todoList]
+    newTodoList.push({ id: Date.now().toString(), status: 'active', item: todo })
+    setTodoList(newTodoList)
   }
 
-  function handleToggleComplete(id: string) {
-    swapItems(id, activeItems, setActiveItems, completedItems, setCompletedItems)
+  function handleDeleteItem(itemId: string) {
+    const newTodoList: TodoList = todoList.map((item) => {
+      if (itemId === item.id) return { ...item, status: 'deleted' }
+      return item
+    })
+    setTodoList(newTodoList)
   }
 
-  function handleToggleActive() {
+  function handleToggleComplete(itemId: string) {
+    const newTodoList: TodoList = todoList.map((item) => {
+      if (itemId === item.id && item.status === 'active') return { ...item, status: 'complete' }
+      if (itemId === item.id && item.status === 'complete') return { ...item, status: 'active' }
+      return item
+    })
+    setTodoList(newTodoList)
+  }
+
+  function handleToggleShowActive() {
     setShowActiveOnly(!showActiveOnly)
   }
 
@@ -67,21 +69,21 @@ const Todo = () => {
     <div className={classes.Todo}>
       <div className={classes.Header}>TODO List</div>
       <ActiveItems
-        items={activeItems}
+        items={getItemsByStatus('active')}
         complete={false}
         showActiveOnly={showActiveOnly}
         deleteItem={(id: string) => handleDeleteItem(id)}
         toggleComplete={(id: string) => handleToggleComplete(id)}
       />
       <ActiveItems
-        items={completedItems}
+        items={getItemsByStatus('complete')}
         complete={true}
         showActiveOnly={showActiveOnly}
         deleteItem={(id: string) => handleDeleteItem(id)}
         toggleComplete={(id: string) => handleToggleComplete(id)}
       />
-      <ListControls addItem={(name: string) => handleAddItem(name)} toggleActive={handleToggleActive} />
-      <DeletedItems items={deletedItems} />
+      <ListControls addItem={(todo: string) => handleAddItem(todo)} toggleShowActiveOnly={handleToggleShowActive} />
+      <DeletedItems items={getItemsByStatus('deleted')} />
     </div>
   )
 }

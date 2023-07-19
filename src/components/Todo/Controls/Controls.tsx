@@ -3,10 +3,10 @@ import classes from './Controls.module.css'
 
 interface ControlsProps {
   addItem: (inputValue: string) => void
-  toggleActive: () => void
+  toggleShowActiveOnly: () => void
 }
 
-const Controls = ({ addItem, toggleActive }: ControlsProps) => {
+const Controls = ({ addItem, toggleShowActiveOnly }: ControlsProps) => {
   const [inputValue, setInputValue] = React.useState('')
 
   function handleInputValueChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -47,7 +47,7 @@ const Controls = ({ addItem, toggleActive }: ControlsProps) => {
           className={classes.Checkbox}
           type='checkbox'
           defaultChecked={false}
-          onClick={toggleActive}
+          onClick={toggleShowActiveOnly}
           data-qa='toggleActiveOnlyCheckbox'
         />
       </div>
