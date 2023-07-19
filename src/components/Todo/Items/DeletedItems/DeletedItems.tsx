@@ -3,14 +3,20 @@ import classes from '../Items.module.css'
 
 interface DeletedItemsProps {
   items: TodoList
+  showActiveOnly: boolean
 }
 
-const DeletedItems = ({ items }: DeletedItemsProps) => {
+const DeletedItems = ({ items, showActiveOnly }: DeletedItemsProps) => {
+  let itemStyle: string = [classes.Item, classes.Complete].join(' ')
+  if (showActiveOnly) {
+    itemStyle = [classes.Hidden, classes.Item, classes.Complete].join(' ')
+  }
+
   return (
     <div className={classes.List} data-qa='deletedItemsList'>
-      <h3>Deleted Items:</h3>
+      <h3 className={showActiveOnly ? classes.Hidden : ''}>Deleted Items:</h3>
       {items.map(({ id, item }) => (
-        <div key={id} id={id} className={[classes.Complete, classes.Item].join(' ')} data-qa='deletedItem'>
+        <div key={id} id={id} className={itemStyle} data-qa='deletedItem'>
           <p className={classes.Text}>{item}</p>
         </div>
       ))}
