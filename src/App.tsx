@@ -6,7 +6,7 @@ import classes from './Todo.module.css'
 import { FirebaseContext } from './components/FirebaseProvider/FirebaseProvider'
 
 // Hardcoded test user for development/demo purposes.
-const user = 'test'
+export const user = 'test'
 
 function App() {
   const Firebase = React.useContext(FirebaseContext)
@@ -17,8 +17,8 @@ function App() {
   React.useEffect(() => {
     if (Firebase == null) throw new Error('Firebase Database context not found')
     ;(async () => {
-      const data = await Firebase.getUserTodoList(user)
-      setTodoList(data)
+      const storedList = await Firebase.getUserTodoList(user)
+      setTodoList(storedList)
       dataLoadComplete.current = true
     })()
   }, [Firebase])
