@@ -1,6 +1,6 @@
 import { ReactNode, createContext } from 'react'
-import Firebase from './firebase'
-import { FirebaseInstance } from './types'
+import Firebase from '../../services/firebase/firebase'
+import { FirebaseInstance } from '../../services/firebase/types'
 
 export const FirebaseContext = createContext<FirebaseInstance | null>(null)
 
