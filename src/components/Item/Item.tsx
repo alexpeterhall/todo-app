@@ -1,5 +1,5 @@
 import React from 'react'
-import classes from '../Items.module.css'
+import classes from '../TodoItems/Items.module.css'
 
 interface ItemProps {
   id: string

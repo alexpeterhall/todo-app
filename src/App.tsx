@@ -1,8 +1,8 @@
 import React from 'react'
-import TodoItems from './components/TodoList/TodoItems/TodoItems'
-import DeletedItems from './components/TodoList/DeletedItems/DeletedItems'
+import TodoItems from './components/TodoItems/TodoItems'
+import DeletedItems from './components/DeletedItems/DeletedItems'
 import ListControls from './components/Controls/Controls'
-import classes from './components/Todo.module.css'
+import classes from './Todo.module.css'
 import { FirebaseContext } from './services/firebase/FirebaseProvider'
 
 // Hardcoded test user for development/demo purposes.
