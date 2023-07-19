@@ -51,6 +51,30 @@ class Firebase implements FirebaseInstance {
       throw new Error('Error WRITING to Firebase ' + error)
     }
   }
+
+  getShowActiveOnly = async (user: string): Promise<boolean> => {
+    const todoList = await get(ref(this.database, `users/${user}/showActiveOnly/`))
+      .then((snapshot) => {
+        if (snapshot.exists()) return snapshot.val()
+        console.log('No data available')
+      })
+      .catch((error) => {
+        console.error(error)
+        throw new Error('Error GETTING from Firebase ' + error)
+      })
+    return todoList
+  }
+
+
+  updateShowActiveOnly = (user: string, showActiveOnly: boolean): void => {
+    try {
+      set(ref(this.database, `users/${user}/showActiveOnly/`), showActiveOnly)
+    }
+    catch (error) {
+      console.error(error)
+      throw new Error('Error WRITING to Firebase ' + error)
+    }
+  }
 }
 
 export default Firebase

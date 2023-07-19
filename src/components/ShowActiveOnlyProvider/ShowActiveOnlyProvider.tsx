@@ -1,9 +1,29 @@
 import React, { ReactNode, createContext } from 'react'
+import { FirebaseContext } from '../FirebaseProvider/FirebaseProvider'
+import { user } from '../../App'
 
 export const ShowActiveOnlyContext = createContext({})
 
 function ShowActiveOnlyProvider({ children }: { children: ReactNode }) {
+  const Firebase = React.useContext(FirebaseContext)
   const [showActiveOnly, setShowActiveOnly] = React.useState(false)
+  const dataLoadComplete = React.useRef(false)
+
+  React.useEffect(() => {
+    if (Firebase == null) throw new Error('Firebase Database context not found')
+    ;(async () => {
+      const storedFlag = await Firebase.getShowActiveOnly(user)
+      setShowActiveOnly(storedFlag)
+      dataLoadComplete.current = true
+    })()
+  }, [Firebase])
+
+  React.useEffect(() => {
+    if (Firebase == null) throw new Error('Firebase Database context not found')
+    if (!dataLoadComplete.current) return
+    Firebase.updateShowActiveOnly(user, showActiveOnly)
+  }, [Firebase, showActiveOnly])
+
   return (
     <ShowActiveOnlyContext.Provider value={{ showActiveOnly, setShowActiveOnly }}>
       {children}
