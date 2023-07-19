@@ -29,13 +29,7 @@ describe('The Active Items Component', () => {
     const deleteItemSpy = cy.spy().as('deleteItemSpy')
     const toggleCompleteSpy = cy.spy().as('toggleCompleteSpy')
     cy.mount(
-      <TodoItems
-        items={activeItems}
-        complete={false}
-        showActiveOnly={false}
-        deleteItem={deleteItemSpy}
-        toggleComplete={toggleCompleteSpy}
-      />
+      <TodoItems items={activeItems} complete={false} deleteItem={deleteItemSpy} toggleComplete={toggleCompleteSpy} />
     )
   })
 

@@ -8,7 +8,7 @@ const deletedItems: TodoList = [
 
 describe('The Active Items Component', () => {
   beforeEach(() => {
-    cy.mount(<DeletedItems items={deletedItems} showActiveOnly={false} />)
+    cy.mount(<DeletedItems items={deletedItems} />)
   })
 
   it('renders deleted items list heading', () => {

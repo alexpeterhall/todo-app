@@ -11,7 +11,6 @@ const user = 'test'
 function App() {
   const Firebase = React.useContext(FirebaseContext)
   const [todoList, setTodoList] = React.useState([] as TodoList)
-  const [showActiveOnly, setShowActiveOnly] = React.useState(false)
   const dataLoadComplete = React.useRef(false)
   const firstRender = React.useRef(true)
 
@@ -61,29 +60,23 @@ function App() {
     setTodoList(newTodoList)
   }
 
-  function handleToggleShowActive() {
-    setShowActiveOnly(!showActiveOnly)
-  }
-
   return (
     <div className={classes.Todo}>
       <div className={classes.Header}>TODO List</div>
       <TodoItems
         items={getItemsByStatus('active')}
         complete={false}
-        showActiveOnly={showActiveOnly}
         deleteItem={(id: string) => handleDeleteItem(id)}
         toggleComplete={(id: string) => handleToggleComplete(id)}
       />
       <TodoItems
         items={getItemsByStatus('complete')}
         complete={true}
-        showActiveOnly={showActiveOnly}
         deleteItem={(id: string) => handleDeleteItem(id)}
         toggleComplete={(id: string) => handleToggleComplete(id)}
       />
-      <ListControls addItem={(todo: string) => handleAddItem(todo)} toggleShowActiveOnly={handleToggleShowActive} />
-      <DeletedItems items={getItemsByStatus('deleted')} showActiveOnly={showActiveOnly} />
+      <ListControls addItem={(todo: string) => handleAddItem(todo)} />
+      <DeletedItems items={getItemsByStatus('deleted')} />
     </div>
   )
 }

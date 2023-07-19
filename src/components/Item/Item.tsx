@@ -1,16 +1,18 @@
 import React from 'react'
+import { ShowActiveOnlyContext } from '../ShowActiveOnlyProvider/ShowActiveOnlyProvider'
 import classes from '../TodoItems/Items.module.css'
 
 interface ItemProps {
   id: string
   text: string
   complete: boolean
-  showActiveOnly: boolean
   toggleComplete: (id: string) => void
   deleteItem: (id: string) => void
 }
 
-const Item = ({ id, text, complete, showActiveOnly, toggleComplete, deleteItem }: ItemProps) => {
+const Item = ({ id, text, complete, toggleComplete, deleteItem }: ItemProps) => {
+  //@ts-ignore
+  const { showActiveOnly } = React.useContext(ShowActiveOnlyContext)
   const thisItem = React.useRef<HTMLInputElement>()
   React.useEffect(() => {
     //@ts-ignore

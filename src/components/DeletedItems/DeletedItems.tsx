@@ -1,12 +1,14 @@
 import React from 'react'
+import { ShowActiveOnlyContext } from '../ShowActiveOnlyProvider/ShowActiveOnlyProvider'
 import classes from '../TodoItems/Items.module.css'
 
 interface DeletedItemsProps {
   items: TodoList
-  showActiveOnly: boolean
 }
 
-const DeletedItems = ({ items, showActiveOnly }: DeletedItemsProps) => {
+const DeletedItems = ({ items }: DeletedItemsProps) => {
+  //@ts-ignore
+  const { showActiveOnly } = React.useContext(ShowActiveOnlyContext)
   let itemStyle: string = [classes.Item, classes.Complete].join(' ')
   if (showActiveOnly) {
     itemStyle = [classes.Hidden, classes.Item, classes.Complete].join(' ')

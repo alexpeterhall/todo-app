@@ -1,13 +1,31 @@
 import React from 'react'
 import classes from './Controls.module.css'
+import { ShowActiveOnlyContext } from '../ShowActiveOnlyProvider/ShowActiveOnlyProvider'
 
 interface ControlsProps {
   addItem: (inputValue: string) => void
-  toggleShowActiveOnly: () => void
 }
 
-const Controls = ({ addItem, toggleShowActiveOnly }: ControlsProps) => {
+const Controls = ({ addItem }: ControlsProps) => {
+  //@ts-ignore
+  const { showActiveOnly, setShowActiveOnly } = React.useContext(ShowActiveOnlyContext)
   const [inputValue, setInputValue] = React.useState('')
+  const toggleActiveCheckbox = React.useRef<HTMLInputElement>()
+  React.useEffect(() => {
+    //@ts-ignore
+    function handleEnterKey(event) {
+      if (event.code === 'Enter' && event.target === toggleActiveCheckbox.current) {
+        setShowActiveOnly((prevState: boolean) => {
+          return !prevState
+        })
+      }
+    }
+    window.addEventListener('keydown', handleEnterKey)
+
+    return () => {
+      window.removeEventListener('keydown', handleEnterKey)
+    }
+  })
 
   function handleInputValueChange(event: React.ChangeEvent<HTMLInputElement>) {
     setInputValue(event.target.value)
@@ -44,10 +62,12 @@ const Controls = ({ addItem, toggleShowActiveOnly }: ControlsProps) => {
       <div className={classes.Filter} data-qa='toggleActiveOnly'>
         <p>Display Only Active Items:</p>
         <input
+          //@ts-ignore
+          ref={toggleActiveCheckbox}
           className={classes.Checkbox}
           type='checkbox'
           defaultChecked={false}
-          onClick={toggleShowActiveOnly}
+          onClick={() => setShowActiveOnly(!showActiveOnly)}
           data-qa='toggleActiveOnlyCheckbox'
         />
       </div>
