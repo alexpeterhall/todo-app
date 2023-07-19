@@ -1,5 +1,5 @@
 import React from 'react'
-import ActiveItems from './Items/ActiveItems/ActiveItems'
+import TodoItems from './Items/TodoItems/TodoItems'
 import DeletedItems from './Items/DeletedItems/DeletedItems'
 import ListControls from './Controls/Controls'
 import classes from './Todo.module.css'
@@ -68,14 +68,14 @@ const Todo = () => {
   return (
     <div className={classes.Todo}>
       <div className={classes.Header}>TODO List</div>
-      <ActiveItems
+      <TodoItems
         items={getItemsByStatus('active')}
         complete={false}
         showActiveOnly={showActiveOnly}
         deleteItem={(id: string) => handleDeleteItem(id)}
         toggleComplete={(id: string) => handleToggleComplete(id)}
       />
-      <ActiveItems
+      <TodoItems
         items={getItemsByStatus('complete')}
         complete={true}
         showActiveOnly={showActiveOnly}
@@ -83,7 +83,7 @@ const Todo = () => {
         toggleComplete={(id: string) => handleToggleComplete(id)}
       />
       <ListControls addItem={(todo: string) => handleAddItem(todo)} toggleShowActiveOnly={handleToggleShowActive} />
-      <DeletedItems items={getItemsByStatus('deleted')} />
+      <DeletedItems items={getItemsByStatus('deleted')} showActiveOnly={showActiveOnly} />
     </div>
   )
 }

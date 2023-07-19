@@ -1,5 +1,5 @@
 import React from 'react'
-import ActiveItems from './ActiveItems'
+import TodoItems from './TodoItems'
 
 const activeItems: TodoList = [
   {
@@ -29,7 +29,7 @@ describe('The Active Items Component', () => {
     const deleteItemSpy = cy.spy().as('deleteItemSpy')
     const toggleCompleteSpy = cy.spy().as('toggleCompleteSpy')
     cy.mount(
-      <ActiveItems
+      <TodoItems
         items={activeItems}
         complete={false}
         showActiveOnly={false}

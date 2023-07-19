@@ -1,7 +1,7 @@
 import React from 'react'
 import classes from '../Items.module.css'
 
-interface ActiveItemsProps {
+interface TodoItemsProps {
   items: TodoList
   complete: boolean
   showActiveOnly: boolean
@@ -9,14 +9,12 @@ interface ActiveItemsProps {
   deleteItem: (id: string) => void
 }
 
-const ActiveItems = ({ items, complete, showActiveOnly, toggleComplete, deleteItem }: ActiveItemsProps) => {
-  let itemStyle: string = ''
+const TodoItems = ({ items, complete, showActiveOnly, toggleComplete, deleteItem }: TodoItemsProps) => {
+  let itemStyle: string = classes.Item
   if (complete && showActiveOnly) {
     itemStyle = [classes.Hidden, classes.Item].join(' ')
   } else if (complete) {
     itemStyle = [classes.Complete, classes.Item].join(' ')
-  } else {
-    itemStyle = classes.Item
   }
   return (
     <div className={classes.List} data-qa='activeItemsList'>
@@ -39,4 +37,4 @@ const ActiveItems = ({ items, complete, showActiveOnly, toggleComplete, deleteIt
   )
 }
 
-export default ActiveItems
+export default TodoItems
