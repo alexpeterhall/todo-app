@@ -11,6 +11,21 @@ interface ItemProps {
 }
 
 const Item = ({ id, text, complete, showActiveOnly, toggleComplete, deleteItem }: ItemProps) => {
+  const thisItem = React.useRef<HTMLInputElement>()
+  React.useEffect(() => {
+    //@ts-ignore
+    function handleEnterKey(event) {
+      if (event.code === 'Enter' && event.target === thisItem.current) {
+        toggleComplete(id)
+      }
+    }
+    window.addEventListener('keydown', handleEnterKey)
+
+    return () => {
+      window.removeEventListener('keydown', handleEnterKey)
+    }
+  })
+
   let itemStyle: string = classes.Item
   if (complete && showActiveOnly) {
     itemStyle = [classes.Hidden, classes.Item].join(' ')
@@ -20,9 +35,11 @@ const Item = ({ id, text, complete, showActiveOnly, toggleComplete, deleteItem }
   return (
     <div key={id} id={id} className={itemStyle} data-qa='activeItem'>
       <input
+        //@ts-ignore
+        ref={thisItem}
+        id={id}
         className={classes.Checkbox}
         type='checkbox'
-        id={id}
         checked={complete ? true : false}
         readOnly={true}
         onClick={() => toggleComplete(id)}
