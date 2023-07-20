@@ -14,8 +14,8 @@ This is built with React and bootstrapped with [Create React App](https://github
   - [x] Read default items from Firebase
   - [x] Save/Write changes to Firebase
 - [x] Make checkbox keyboard accessible
+- [x] Save state in Firebase for hiding completed items
 - [ ] Open items in a modal overlay to further edit
-- [ ] Save state in Firebase for hiding completed items
 - [ ] Drag and drop re-ordering of items
 - [ ] Color code prioritizing
 - [ ] Toggle display date on items
