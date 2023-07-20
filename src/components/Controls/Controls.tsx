@@ -7,17 +7,13 @@ interface ControlsProps {
 }
 
 const Controls = ({ addItem }: ControlsProps) => {
-  //@ts-ignore
   const { showActiveOnly, setShowActiveOnly } = React.useContext(ShowActiveOnlyContext)
   const [inputValue, setInputValue] = React.useState('')
   const toggleActiveCheckbox = React.useRef<HTMLInputElement>()
   React.useEffect(() => {
-    //@ts-ignore
-    function handleEnterKey(event) {
+    function handleEnterKey(event: KeyboardEvent) {
       if (event.code === 'Enter' && event.target === toggleActiveCheckbox.current) {
-        setShowActiveOnly((prevState: boolean) => {
-          return !prevState
-        })
+        setShowActiveOnly(!showActiveOnly)
       }
     }
     window.addEventListener('keydown', handleEnterKey)
@@ -25,6 +21,7 @@ const Controls = ({ addItem }: ControlsProps) => {
     return () => {
       window.removeEventListener('keydown', handleEnterKey)
     }
+    //TODO Figure out dependency array to run only onMount. Context value always new?
   })
 
   function handleInputValueChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -66,7 +63,8 @@ const Controls = ({ addItem }: ControlsProps) => {
           ref={toggleActiveCheckbox}
           className={classes.Checkbox}
           type='checkbox'
-          defaultChecked={false}
+          //! Fix. Not working.
+          defaultChecked={showActiveOnly}
           onClick={() => setShowActiveOnly(!showActiveOnly)}
           data-qa='toggleActiveOnlyCheckbox'
         />

@@ -1,8 +1,16 @@
-import React, { ReactNode, createContext } from 'react'
+import React, { ReactNode, createContext, Dispatch } from 'react'
 import { FirebaseContext } from '../FirebaseProvider/FirebaseProvider'
 import { user } from '../../App'
 
-export const ShowActiveOnlyContext = createContext({})
+interface ShowActiveOnly {
+  showActiveOnly: boolean
+  setShowActiveOnly: Dispatch<boolean>
+}
+
+export const ShowActiveOnlyContext = createContext<ShowActiveOnly>({
+  showActiveOnly: false,
+  setShowActiveOnly: () => {},
+})
 
 function ShowActiveOnlyProvider({ children }: { children: ReactNode }) {
   const Firebase = React.useContext(FirebaseContext)
